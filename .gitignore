@@ -7,6 +7,7 @@ build/
 # Tooling
 .cache/
 compile_commands.json
+.DS_Store
 
 # Personal notes (not tracked)
 further-work.txt
