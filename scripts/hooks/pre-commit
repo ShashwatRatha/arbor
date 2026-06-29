@@ -1,0 +1,15 @@
+#!/bin/zsh
+# Abort the commit if any staged C/C++ file is not correctly formatted.
+set -euo pipefail
+
+staged=$(git diff --cached --name-only --diff-filter=ACM \
+         | grep -E '\.(c|h|cpp|hpp)$' || true)
+
+[[ -n "$staged" ]] || exit 0   # nothing relevant staged
+
+if ! echo "$staged" | xargs clang-format --style=file --Werror --dry-run 2>/dev/null; then
+    echo "error: formatting required — run ./scripts/format before committing." >&2
+    exit 2
+fi
+
+echo "Pre-commit: formatting OK."

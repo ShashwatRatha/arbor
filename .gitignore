@@ -1,0 +1,12 @@
+# Build artefacts
+bin/
+build/
+*.o
+*.out
+
+# Tooling
+.cache/
+compile_commands.json
+
+# Personal notes (not tracked)
+further-work.txt

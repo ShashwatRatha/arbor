@@ -1,0 +1,10 @@
+#!/bin/zsh
+# Abort the push if the project does not build cleanly.
+set -euo pipefail
+
+echo "Pre-push: building…"
+if ! zsh ./scripts/build > /dev/null 2>&1; then
+    echo "error: build failed — fix errors before pushing." >&2
+    exit 1
+fi
+echo "Pre-push: build OK."

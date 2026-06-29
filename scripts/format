@@ -1,0 +1,7 @@
+#!/bin/zsh
+# Format all C/C++ sources using clang-format (Google style as default).
+set -euo pipefail
+[[ -f .clang-format ]] || clang-format -style=google -dump-config > .clang-format
+find src include tests -regex '.*\.\(c\|h\|cpp\|hpp\)' -print0 \
+    | xargs -0 -r clang-format -i
+echo "Formatting complete."
